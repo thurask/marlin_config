@@ -647,6 +647,7 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
 
+  // my default: P21.73 I1.54 D76.55
   // Creality Ender-3
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
@@ -655,9 +656,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  19.99
-    #define DEFAULT_Ki   1.26
-    #define DEFAULT_Kd  79.17
+    #define DEFAULT_Kp  21.33
+    #define DEFAULT_Ki   1.50
+    #define DEFAULT_Kd  75.95
   #endif
 #endif
 
@@ -738,9 +739,10 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  // my default: P0.00 I0.00 D0.00
+  #define DEFAULT_bedKp 232.88
+  #define DEFAULT_bedKi 43.45
+  #define DEFAULT_bedKd 832.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
