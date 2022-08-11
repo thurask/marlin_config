@@ -2125,7 +2125,7 @@
   // Override the mesh area if the automatic (max) area is too large
   #define MESH_MIN_X MESH_INSET
   #define MESH_MIN_Y MESH_INSET
-  #define MESH_MAX_X X_BED_SIZE - (38) // bed_size - ( max_pos - probe_offset_x ) : 235 - (245-48) = 38 ; https://github.com/MarlinFirmware/Marlin/issues/22236
+  #define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
   #define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #endif
 
