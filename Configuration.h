@@ -1197,8 +1197,8 @@
  *   M204 T    Travel Acceleration
  */
 #define DEFAULT_ACCELERATION           500  // X, Y, Z ... and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION   500  // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION    500  // X, Y, Z ... acceleration for travel (non printing) moves
+#define DEFAULT_RETRACT_ACCELERATION   800  // E acceleration for retracts // CUSTOMIZED_EDITED
+#define DEFAULT_TRAVEL_ACCELERATION    1000  // X, Y, Z ... acceleration for travel (non printing) moves // CUSTOMIZED_EDITED
 
 /**
  * Default Jerk limits (mm/s)
@@ -1565,7 +1565,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST // CUSTOMIZED_EDITED
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
