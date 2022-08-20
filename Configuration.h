@@ -1480,7 +1480,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 15 // CUSTOMIZED_EDITED
+#define PROBING_MARGIN 16 // CUSTOMIZED_EDITED
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (200*60) // CUSTOMIZED_EDITED
@@ -1688,14 +1688,14 @@
 
 // The size of the printable area
 #define X_BED_SIZE 235
-#define Y_BED_SIZE 235  // the Y-axis tensioner cuts off some printable area // CUSTOMIZED_EDITED
+#define Y_BED_SIZE 235  // the Y-axis tensioner cuts off some printable area if not installed right // CUSTOMIZED_EDITED
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 10 // extra room to maneuver // CUSTOMIZED_EDITED
-#define Y_MAX_POS Y_BED_SIZE
+#define X_MAX_POS X_BED_SIZE + 10 // (245) extra room to maneuver because linear rails // CUSTOMIZED_EDITED
+#define Y_MAX_POS Y_BED_SIZE + 5 // (240) extra room to maneuver because linear rails // CUSTOMIZED_EDITED
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -1974,7 +1974,7 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 15              // Set Mesh bounds as an inset region of the bed // CUSTOMIZED_EDITED
+  #define MESH_INSET 20              // Set Mesh bounds as an inset region of the bed // CUSTOMIZED_EDITED
   #define GRID_MAX_POINTS_X 11      // Don't use more than 15 points per axis, implementation limited. // CUSTOMIZED_EDITED
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
