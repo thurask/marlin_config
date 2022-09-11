@@ -1476,11 +1476,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -47.8, -5.8, 0 } // CUSTOMIZED_EDITED
+#define NOZZLE_TO_PROBE_OFFSET { -45, -6, 0 } // CUSTOMIZED_EDITED
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 16 // CUSTOMIZED_EDITED
+#define PROBING_MARGIN 18 // CUSTOMIZED_EDITED
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (200*60) // CUSTOMIZED_EDITED
@@ -1694,8 +1694,8 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 10 // (245) extra room to maneuver because linear rails // CUSTOMIZED_EDITED
-#define Y_MAX_POS Y_BED_SIZE + 5 // (240) extra room to maneuver because linear rails // CUSTOMIZED_EDITED
+#define X_MAX_POS X_BED_SIZE + 15 // (250) extra room to maneuver because linear rails and adjustable endstops // CUSTOMIZED_EDITED
+#define Y_MAX_POS Y_BED_SIZE // linear rails installed properly give maybe 1mm extra, not worth it // CUSTOMIZED_EDITED
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -2018,7 +2018,7 @@
 #define LCD_BED_TRAMMING // CUSTOMIZED_EDITED
 
 #if ENABLED(LCD_BED_TRAMMING)
-  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
+  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets // default is 30 for all; CUSTOMIZED_EDITED
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at leveling points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z height of nozzle between leveling points
   //#define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner
