@@ -1161,7 +1161,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 99.27168 } // CUSTOMIZED_EDITED
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 398 } // Chinesium clone BMG extruder; CUSTOMIZED_EDITED
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
