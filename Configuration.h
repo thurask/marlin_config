@@ -658,9 +658,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  38.25 // CUSTOMIZED_EDITED
-    #define DEFAULT_Ki   4.23 // CUSTOMIZED_EDITED
-    #define DEFAULT_Kd  86.40 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kp  29.82 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki   3.24 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd  68.59 // CUSTOMIZED_EDITED
   #endif
 #endif
 
@@ -743,9 +743,9 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   // my default: P0.00 I0.00 D0.00
-  #define DEFAULT_bedKp 243.90 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 47.64// CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 832.50 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 238.04 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 45.78// CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 825.20 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1695,7 +1695,7 @@
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE + 15 // (250) extra room to maneuver because linear rails and adjustable endstops // CUSTOMIZED_EDITED
-#define Y_MAX_POS Y_BED_SIZE // linear rails installed properly give maybe 1mm extra, not worth it // CUSTOMIZED_EDITED
+#define Y_MAX_POS Y_BED_SIZE  // (235) linear rails installed properly give maybe 1mm extra, not worth it // CUSTOMIZED_EDITED
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
