@@ -658,9 +658,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  43.35 // CUSTOMIZED_EDITED
-    #define DEFAULT_Ki   6.37 // CUSTOMIZED_EDITED
-    #define DEFAULT_Kd  73.69 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kp  39.35 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki   5.29 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd  73.20 // CUSTOMIZED_EDITED
   #endif
 #endif
 
@@ -743,9 +743,9 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   // my default: P0.00 I0.00 D0.00
-  #define DEFAULT_bedKp 309.69 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 60.49 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 1057.06 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 220.26 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 41.09 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 787.06 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1480,7 +1480,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 18 // CUSTOMIZED_EDITED
+#define PROBING_MARGIN 10 // CUSTOMIZED_EDITED -- PEI plate means no bed clips
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (200*60) // CUSTOMIZED_EDITED
