@@ -1687,14 +1687,15 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 235
+#define X_BED_SIZE 233  // the X linear rail sacrifices some area
 #define Y_BED_SIZE 235  // the Y-axis tensioner cuts off some printable area if not installed right // CUSTOMIZED_EDITED
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
+// https://manuelmclure.github.io/ConfiguringLeveling.html  CUSTOMIZED_EDITED
+#define X_MIN_POS 0  // CUSTOMIZED_EDITED
+#define Y_MIN_POS -13  // CUSTOMIZED_EDITED
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 15 // (250) extra room to maneuver because linear rails and adjustable endstops // CUSTOMIZED_EDITED
+#define X_MAX_POS X_BED_SIZE + 22 // (255) extra room to maneuver because linear rails and adjustable endstops // CUSTOMIZED_EDITED
 #define Y_MAX_POS Y_BED_SIZE  // (235) linear rails installed properly give maybe 1mm extra, not worth it // CUSTOMIZED_EDITED
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
