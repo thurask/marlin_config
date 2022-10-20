@@ -1687,7 +1687,7 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 233  // the X linear rail sacrifices some area
+#define X_BED_SIZE 235  // the X linear rail sacrifices some area
 #define Y_BED_SIZE 235  // the Y-axis tensioner cuts off some printable area if not installed right // CUSTOMIZED_EDITED
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
