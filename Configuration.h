@@ -658,9 +658,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  39.35 // CUSTOMIZED_EDITED
-    #define DEFAULT_Ki   5.29 // CUSTOMIZED_EDITED
-    #define DEFAULT_Kd  73.20 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kp  36.12 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki   4.51 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd  72.24 // CUSTOMIZED_EDITED
   #endif
 #endif
 
@@ -743,9 +743,9 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   // my default: P0.00 I0.00 D0.00
-  #define DEFAULT_bedKp 216.63 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 42.35 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 738.76 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 248.24 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 48.48 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 847.32 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1161,7 +1161,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 398 } // Chinesium clone BMG extruder; CUSTOMIZED_EDITED
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 408 } // Chinesium clone BMG extruder; CUSTOMIZED_EDITED
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
