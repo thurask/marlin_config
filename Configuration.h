@@ -670,9 +670,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  42.07 // CUSTOMIZED_EDITED
-    #define DEFAULT_Ki   6.26 // CUSTOMIZED_EDITED
-    #define DEFAULT_Kd  70.67 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kp  40.48 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki   6.02 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd  68.00 // CUSTOMIZED_EDITED
   #endif
 #endif
 
@@ -755,9 +755,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 309.33 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 60.42 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 1055.83 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 247.26 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 47.55 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 857.17 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1702,11 +1702,11 @@
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 // https://manuelmclure.github.io/ConfiguringLeveling.html CUSTOMIZED_EDITED
-#define X_MIN_POS -3 // CUSTOMIZED_EDITED
-#define Y_MIN_POS -10 // CUSTOMIZED_EDITED
+#define X_MIN_POS -4 // CUSTOMIZED_EDITED
+#define Y_MIN_POS -14 // CUSTOMIZED_EDITED
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 18 // (253) linear rails CUSTOMIZED_EDITED
-#define Y_MAX_POS Y_BED_SIZE + 2 // (237) linear rails CUSTOMIZED_EDITED
+#define X_MAX_POS X_BED_SIZE + 15 // (250) linear rails CUSTOMIZED_EDITED
+#define Y_MAX_POS Y_BED_SIZE // (235) linear rails CUSTOMIZED_EDITED
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
