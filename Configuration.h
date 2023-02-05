@@ -621,7 +621,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 300 // Micro Swiss hotend // CUSTOMIZED_EDITED
+#define HEATER_0_MAXTEMP 450 // Micro Swiss plated copper high temperature hotend // CUSTOMIZED_EDITED
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -670,9 +670,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  31.37 // CUSTOMIZED_EDITED
-    #define DEFAULT_Ki   3.67 // CUSTOMIZED_EDITED
-    #define DEFAULT_Kd  67.14 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kp  30.45 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki   3.34 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd  69.43 // CUSTOMIZED_EDITED
   #endif
 #endif
 
@@ -755,9 +755,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 250.33 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 47.41 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 881.17 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 206.06 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 40.27 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 703.01 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1990,7 +1990,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed // CUSTOMIZED_EDITED
-  #define GRID_MAX_POINTS_X 11      // Don't use more than 15 points per axis, implementation limited. // CUSTOMIZED_EDITED
+  #define GRID_MAX_POINTS_X 15      // Don't use more than 15 points per axis, implementation limited. // CUSTOMIZED_EDITED
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points // CUSTOMIZED_EDITED
