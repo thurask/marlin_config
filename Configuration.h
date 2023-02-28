@@ -538,7 +538,7 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
  */
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 1047  // Pt1000 from Amazon CUSTOMIZED_EDITED
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -670,9 +670,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  30.45 // CUSTOMIZED_EDITED
-    #define DEFAULT_Ki   3.34 // CUSTOMIZED_EDITED
-    #define DEFAULT_Kd  69.43 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kp  16.71 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki   1.39 // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd  50.12 // CUSTOMIZED_EDITED
   #endif
 #endif
 
@@ -755,9 +755,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 206.06 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 40.27 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 703.01 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 117.67 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 22.98 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 401.66 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1171,14 +1171,14 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 408 } // Chinesium clone BMG extruder // CUSTOMIZED_EDITED
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 138 } // Micro-Swiss dual-gear Bowden extruder // CUSTOMIZED_EDITED
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 5, 100 } // Chinesium clone BMG extruder // CUSTOMIZED_EDITED
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 5, 100 } // Micro-Swiss dual-gear Bowden extruder // CUSTOMIZED_EDITED
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1486,7 +1486,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -45, -6, 0 } // CUSTOMIZED_EDITED
+#define NOZZLE_TO_PROBE_OFFSET { -48, -10, 0 } // CR Touch mount thing:4978929 CUSTOMIZED_EDITED
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
