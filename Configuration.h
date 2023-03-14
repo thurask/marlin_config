@@ -100,7 +100,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT -1
+#define SERIAL_PORT 2  // CUSTOMIZED_EDITED
 
 /**
  * Serial Port Baud Rate
@@ -122,7 +122,7 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 2
+#define SERIAL_PORT_2 -1  // CUSTOMIZED_EDITED
 #define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE  // CUSTOMIZED_EDITED
 
 /**
@@ -546,7 +546,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_BED 11 // NTC3950 Gulfcoast Robotics cast bed // CUSTOMIZED_EDITED
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -754,9 +754,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 117.67  // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 22.98  // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 401.66  // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 84.81  // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 16.06 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 298.54  // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1701,10 +1701,10 @@
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 // https://manuelmclure.github.io/ConfiguringLeveling.html  // CUSTOMIZED_EDITED
-#define X_MIN_POS -4  // CUSTOMIZED_EDITED
-#define Y_MIN_POS -14  // CUSTOMIZED_EDITED
+#define X_MIN_POS 0  // CUSTOMIZED_EDITED
+#define Y_MIN_POS 0  // CUSTOMIZED_EDITED
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 15 // (250) linear rails  // CUSTOMIZED_EDITED
+#define X_MAX_POS X_BED_SIZE // (235) linear rails  // CUSTOMIZED_EDITED
 #define Y_MAX_POS Y_BED_SIZE // (235)  // CUSTOMIZED_EDITED
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
@@ -2060,7 +2060,7 @@
    *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
    *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
    */
-  #define BED_TRAMMING_LEVELING_ORDER { LF, RF, RB, LB }
+  #define BED_TRAMMING_LEVELING_ORDER { LB, LF }  // 3-point leveling with Gulfcoast Robotics cast bed // CUSTOMIZED_EDITED
 #endif
 
 /**
