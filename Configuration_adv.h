@@ -2478,7 +2478,7 @@
 #define SERIAL_OVERRUN_PROTECTION
 
 // For serial echo, the number of digits after the decimal point
-//#define SERIAL_FLOAT_PRECISION 4
+#define SERIAL_FLOAT_PRECISION 4  // CUSTOMIZED_EDITED
 
 /**
  * Set the number of proportional font spaces required to fill up a typical character space.
@@ -3679,8 +3679,8 @@
 #endif
 
 // Support for MeatPack G-code compression (https://github.com/scottmudge/OctoPrint-MeatPack)
-#define MEATPACK_ON_SERIAL_PORT_1
-//#define MEATPACK_ON_SERIAL_PORT_2
+#define MEATPACK_ON_SERIAL_PORT_1  // CUSTOMIZED_EDITED
+#define MEATPACK_ON_SERIAL_PORT_2  // CUSTOMIZED_EDITED
 
 #define GCODE_CASE_INSENSITIVE  // Accept G-code sent to the firmware in lowercase
 
@@ -3854,7 +3854,7 @@
   #define HOST_PAUSE_M76                  // Tell the host to pause in response to M76
   #define HOST_PROMPT_SUPPORT             // Initiate host prompts to get user feedback
   #if ENABLED(HOST_PROMPT_SUPPORT)
-    //#define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
+    #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications  // CUSTOMIZED_EDITED
   #endif
   #define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start  // CUSTOMIZED_EDITED
   //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
