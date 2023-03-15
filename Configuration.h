@@ -826,14 +826,14 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 180  // CUSTOMIZED_EDITED
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 600  // CUSTOMIZED_EDITED
+#define EXTRUDE_MAXLENGTH 1000  // CUSTOMIZED_EDITED
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -2488,13 +2488,13 @@
 // This option overrides the default number of encoder pulses needed to
 // produce one step. Should be increased for high-resolution encoders.
 //
-//#define ENCODER_PULSES_PER_STEP 4
+#define ENCODER_PULSES_PER_STEP 4  // CUSTOMIZED_EDITED
 
 //
 // Use this option to override the number of step signals required to
 // move between next/prev menu items.
 //
-//#define ENCODER_STEPS_PER_MENU_ITEM 1
+#define ENCODER_STEPS_PER_MENU_ITEM 1  // CUSTOMIZED_EDITED
 
 /**
  * Encoder Direction Options
@@ -2562,8 +2562,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 20
-#define LCD_FEEDBACK_FREQUENCY_HZ 1000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2  // CUSTOMIZED_EDITED
+#define LCD_FEEDBACK_FREQUENCY_HZ 5000  // CUSTOMIZED_EDITED
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
@@ -3346,7 +3346,7 @@
  *
  * For some servo-related options NUM_SERVOS will be set automatically.
  * Set this manually if there are extra servos needing manual control.
- * Set to 0 to turn off servo support.
+ * Set to 0 to turn off servo support
  */
 //#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
 
