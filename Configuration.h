@@ -3346,7 +3346,7 @@
  *
  * For some servo-related options NUM_SERVOS will be set automatically.
  * Set this manually if there are extra servos needing manual control.
- * Set to 0 to turn off servo support
+ * Set to 0 to turn off servo support.
  */
 //#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
 
