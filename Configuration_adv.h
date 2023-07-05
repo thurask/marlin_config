@@ -192,7 +192,7 @@
 
 /**
  * Hephestos 2 24V heated bed upgrade kit.
- * https://store.bq.com/en/heated-bed-kit-hephestos2
+ * https://www.en3dstudios.com/product/bq-hephestos-2-heated-bed-kit/
  */
 //#define HEPHESTOS2_HEATED_BED_KIT
 #if ENABLED(HEPHESTOS2_HEATED_BED_KIT)
@@ -1127,7 +1127,7 @@
    * Advanced configuration
    */
   #define FTM_BATCH_SIZE            100                 // Batch size for trajectory generation;
-                                                        // half the window size for Ulendo FBS.
+  #define FTM_WINDOW_SIZE           200                 // Window size for trajectory generation.
   #define FTM_FS                   1000                 // (Hz) Frequency for trajectory generation. (1 / FTM_TS)
   #define FTM_TS                      0.001f            // (s) Time step for trajectory generation. (1 / FTM_FS)
   #define FTM_STEPPER_FS          20000                 // (Hz) Frequency for stepper I/O update.
@@ -2033,6 +2033,21 @@
       #define DGUS_UI_WAITING_STATUS 10
       #define DGUS_UI_WAITING_STATUS_PERIOD 8 // Increase to slower waiting status looping
     #endif
+  #elif DGUS_UI_IS(E3S1PRO)
+    /**
+     * The stock Ender-3 S1 Pro/Plus display firmware has rather poor SD file handling.
+     *
+     * The autoscroll is mainly useful for status messages, filenames, and the "About" page.
+     *
+     * NOTE: The Advanced SD Card option is affected by the stock touchscreen firmware, so
+     *       pages 5 and up will display "4/4". This may get fixed in a screen firmware update.
+     */
+    #define DGUS_SOFTWARE_AUTOSCROLL        // Enable long text software auto-scroll
+    #define DGUS_AUTOSCROLL_START_CYCLES 1  // Refresh cycles without scrolling at the beginning of text strings
+    #define DGUS_AUTOSCROLL_END_CYCLES 1    // ... at the end of text strings
+
+    #define DGUS_ADVANCED_SDCARD            // Allow more than 20 files and navigating directories
+    #define DGUS_USERCONFIRM                // Reuse the SD Card page to show various messages
   #endif
 #endif // HAS_DGUS_LCD
 
@@ -2208,7 +2223,6 @@
  */
 #define BABYSTEPPING // CUSTOMIZED_EDITED
 #if ENABLED(BABYSTEPPING)
-  #define INTEGRATED_BABYSTEPPING           // Integration of babystepping into the Stepper ISR // CUSTOMIZED_EDITED
   //#define EP_BABYSTEPPING                 // M293/M294 babystepping with EMERGENCY_PARSER support
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement)
@@ -2874,7 +2888,7 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current. // CUSTOMIZED_EDITED
+    #define X_CURRENT       1160        // (mA) RMS current. Multiply by 1.414 for peak current. // E3D 42x48 0.9deg motor CUSTOMIZED_EDITED
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11     // Multiplied x1000 for TMC26X
@@ -2894,7 +2908,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       580 // CUSTOMIZED_EDITED
+    #define Y_CURRENT       1160 // E3D 42x40 0.9deg motor CUSTOMIZED_EDITED
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -2914,7 +2928,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       580 // CUSTOMIZED_EDITED
+    #define Z_CURRENT       580 // Creality 42x34 1.8deg motor CUSTOMIZED_EDITED
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -2924,7 +2938,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z2)
-    #define Z2_CURRENT      Z_CURRENT
+    #define Z2_CURRENT      Z_CURRENT // Creality 42x34 1.8deg motor CUSTOMIZED_EDITED
     #define Z2_CURRENT_HOME Z_CURRENT_HOME
     #define Z2_MICROSTEPS   Z_MICROSTEPS
     #define Z2_RSENSE       Z_RSENSE
@@ -3014,7 +3028,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      700 // CUSTOMIZED_EDITED
+    #define E0_CURRENT      700 //  Creality 42x40 1.8deg motor CUSTOMIZED_EDITED
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -3432,7 +3446,7 @@
   //#define PHOTOGRAPH_PIN 23
 
   // Canon Hack Development Kit
-  // https://captain-slow.dk/2014/03/09/3d-printing-timelapses/
+  // https://web.archive.org/web/20200920094805/https://captain-slow.dk/2014/03/09/3d-printing-timelapses/
   //#define CHDK_PIN        4
 
   // Optional second move with delay to trigger the camera shutter
@@ -4043,7 +4057,7 @@
  * Wiki: https://wiki.aus3d.com.au/Magnetic_Encoder
  * Github: https://github.com/Aus3D/MagneticEncoder
  *
- * Supplier: https://aus3d.com.au/magnetic-encoder-module
+ * Supplier: https://aus3d.com.au/products/magnetic-encoder-module
  * Alternative Supplier: https://reliabuild3d.com/
  *
  * Reliabuild encoders have been modified to improve reliability.
@@ -4314,7 +4328,7 @@
   /**
    * Using a sensor like the MMU2S
    * This mode requires a MK3S extruder with a sensor at the extruder idler, like the MMU2S.
-   * See https://help.prusa3d.com/en/guide/3b-mk3s-mk2-5s-extruder-upgrade_41560, step 11
+   * See https://help.prusa3d.com/guide/3b-mk3s-mk2-5s-extruder-upgrade_41560#42048, step 11
    */
   #if HAS_PRUSA_MMU2S
     #define MMU2_C0_RETRY   5             // Number of retries (total time = timeout*retries)

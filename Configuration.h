@@ -48,12 +48,13 @@
  *
  * Example Configs:     https://github.com/MarlinFirmware/Configurations/branches/all
  *
- * Průša Calculator:    https://blog.prusaprinters.org/calculator_3416/
+ * Průša Calculator:    https://prusa3d.com/calculator_3416/
  *
  * Calibration Guides:  https://reprap.org/wiki/Calibration
  *                      https://reprap.org/wiki/Triffid_Hunter%27s_Calibration_Guide
- *                      https://sites.google.com/site/repraplogphase/calibration-of-your-reprap
+ *                      https://web.archive.org/web/20220907014303/https://sites.google.com/site/repraplogphase/calibration-of-your-reprap
  *                      https://youtu.be/wAL9d7FgInk
+ *                      https://teachingtechyt.github.io/calibration.html
  *
  * Calibration Objects: https://www.thingiverse.com/thing:5573
  *                      https://www.thingiverse.com/thing:1278865
@@ -689,9 +690,9 @@
     #define DEFAULT_Ki_LIST {   0.756,   0.756 }
     #define DEFAULT_Kd_LIST { 106.145, 106.145 }
   #else
-    #define DEFAULT_Kp 13.38
-    #define DEFAULT_Ki 1.01
-    #define DEFAULT_Kd 44.41
+    #define DEFAULT_Kp 25.42
+    #define DEFAULT_Ki 2.67
+    #define DEFAULT_Kd 60.51
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -700,9 +701,9 @@
 /**
  * Model Predictive Control for hotend
  *
- * Use a physical model of the hotend to control temperature. When configured correctly
- * this gives better responsiveness and stability than PID and it also removes the need
- * for PID_EXTRUSION_SCALING and PID_FAN_SCALING. Use M306 T to autotune the model.
+ * Use a physical model of the hotend to control temperature. When configured correctly this gives
+ * better responsiveness and stability than PID and removes the need for PID_EXTRUSION_SCALING
+ * and PID_FAN_SCALING. Enable MPC_AUTOTUNE and use M306 T to autotune the model.
  * @section mpctemp
  */
 #if ENABLED(MPCTEMP)
@@ -729,8 +730,12 @@
     //#define MPC_FAN_0_ACTIVE_HOTEND
   #endif
 
+  // Filament Heat Capacity (joules/kelvin/mm)
+  // Set at runtime with M306 H<value>
   #define FILAMENT_HEAT_CAPACITY_PERMM { 5.6e-3f }    // 0.0056 J/K/mm for 1.75mm PLA (0.0149 J/K/mm for 2.85mm PLA).
-  //#define FILAMENT_HEAT_CAPACITY_PERMM { 3.6e-3f }  // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
+                                                      // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
+                                                      // 0.00515 J/K/mm for 1.75mm ABS (0.0137 J/K/mm for 2.85mm ABS).
+                                                      // 0.00522 J/K/mm for 1.75mm Nylon (0.0138 J/K/mm for 2.85mm Nylon).
 
   // Advanced options
   #define MPC_SMOOTHING_FACTOR 0.5f                   // (0.0...1.0) Noisy temperature sensors may need a lower value for stabilization.
@@ -773,9 +778,9 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // Gulfcoast Robotics bed and heater
-  #define DEFAULT_bedKp 33.35 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 3.00 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 247.21 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 73.22 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 11.89 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 300.69 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -998,8 +1003,8 @@
     // Radius around the center where the arm cannot reach
     #define MIDDLE_DEAD_ZONE_R   0  // (mm)
 
-    #define THETA_HOMING_OFFSET  0  // Calculated from Calibration Guide and M360 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
-    #define PSI_HOMING_OFFSET    0  // Calculated from Calibration Guide and M364 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
+    #define THETA_HOMING_OFFSET  0  // Calculated from Calibration Guide and M360 / M114. See https://www.morgan3dp.com/morgan-calibration-guide/
+    #define PSI_HOMING_OFFSET    0  // Calculated from Calibration Guide and M360 / M114. See https://www.morgan3dp.com/morgan-calibration-guide/
 
   #elif ENABLED(MP_SCARA)
 
@@ -1033,7 +1038,7 @@
   // Radius around the center where the arm cannot reach
   #define MIDDLE_DEAD_ZONE_R   0  // (mm)
 
-  // Calculated from Calibration Guide and M360 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
+  // Calculated from Calibration Guide and M360 / M114. See https://www.morgan3dp.com/morgan-calibration-guide/
   #define THETA_HOMING_OFFSET  0
   #define PSI_HOMING_OFFSET    0
 #endif
@@ -1226,7 +1231,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 1600, 138 } // TR8x2 screws for Z, Micro-Swiss Bowden extruder for E CUSTOMIZED_EDITED
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 138 } // 0.9 deg E3D motor + GT2 belt for X and Y, 1.8 deg Creality motors + TR8x2 screws for Z, Micro-Swiss Bowden extruder for E CUSTOMIZED_EDITED
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1463,7 +1468,7 @@
   #define MAG_MOUNTED_STOW_5   { PROBE_STOW_FEEDRATE,   {   0,   0,  0 } }  // Extra move if needed
 #endif
 
-// Duet Smart Effector (for delta printers) - https://bit.ly/2ul5U7J
+// Duet Smart Effector (for delta printers) - https://docs.duet3d.com/en/Duet3D_hardware/Accessories/Smart_Effector
 // When the pin is defined you can use M672 to set/reset the probe sensitivity.
 //#define DUET_SMART_EFFECTOR
 #if ENABLED(DUET_SMART_EFFECTOR)
@@ -1481,7 +1486,7 @@
 #define DIAG_JUMPERS_REMOVED // get PlatformIO off my back // CUSTOMIZED_EDITED
 
 /**
- * Allen key retractable z-probe as seen on many Kossel delta printers - https://reprap.org/wiki/Kossel#Automatic_bed_leveling_probe
+ * Allen key retractable z-probe as seen on many Kossel delta printers - https://reprap.org/wiki/Kossel#Autolevel_probe
  * Deploys by touching z-axis belt. Retracts by pushing the probe down.
  */
 //#define Z_PROBE_ALLEN_KEY
@@ -1774,7 +1779,7 @@
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0 // Micro-Swiss rail + extruder kit CUSTOMIZED_EDITED
-#define Y_MIN_POS -17 // Gulfcoast Robotics rail kit CUSTOMIZED_EDITED
+#define Y_MIN_POS -16 // Gulfcoast Robotics rail kit CUSTOMIZED_EDITED
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE + 17 // CUSTOMIZED_EDITED
 #define Y_MAX_POS Y_BED_SIZE // CUSTOMIZED_EDITED
@@ -2760,7 +2765,7 @@
 
 //
 // Original RADDS LCD Display+Encoder+SDCardReader
-// http://doku.radds.org/dokumentation/lcd-display/
+// https://web.archive.org/web/20200719145306/http://doku.radds.org/dokumentation/lcd-display/
 //
 //#define RADDS_DISPLAY
 
@@ -2790,7 +2795,6 @@
 
 //
 // RigidBot Panel V1.0
-// http://www.inventapart.com/
 //
 //#define RIGIDBOT_PANEL
 
@@ -2834,8 +2838,9 @@
 //
 // Sainsmart (YwRobot) LCD Displays
 //
-// These require F.Malpartida's LiquidCrystal_I2C library
-// https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home
+// These require LiquidCrystal_I2C library:
+//   https://github.com/MarlinFirmware/New-LiquidCrystal
+//   https://github.com/fmalpartida/New-LiquidCrystal/wiki
 //
 //#define LCD_SAINSMART_I2C_1602
 //#define LCD_SAINSMART_I2C_2004
@@ -2868,7 +2873,7 @@
 //
 
 //
-// 2-wire Non-latching LCD SR from https://goo.gl/aJJ4sH
+// 2-wire Non-latching LCD SR from https://github.com/fmalpartida/New-LiquidCrystal/wiki/schematics#user-content-ShiftRegister_connection
 // LCD configuration: https://reprap.org/wiki/SAV_3D_LCD
 //
 //#define SAV_3DLCD
@@ -2940,7 +2945,7 @@
 
 //
 // MaKr3d Makr-Panel with graphic controller and SD support.
-// https://reprap.org/wiki/MaKr3d_MaKrPanel
+// https://reprap.org/wiki//MaKrPanel
 //
 //#define MAKRPANEL
 
@@ -2958,7 +2963,7 @@
 
 //
 // Cartesio UI
-// http://mauk.cc/webshop/cartesio-shop/electronics/user-interface
+// https://web.archive.org/web/20180605050442/http://mauk.cc/webshop/cartesio-shop/electronics/user-interface
 //
 //#define CARTESIO_UI
 
@@ -3003,12 +3008,15 @@
 
 //
 // BigTreeTech Mini 12864 V1.0 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
+// https://github.com/bigtreetech/MINI-12864/tree/master/mini12864_v1.0
 //
 //#define BTT_MINI_12864_V1
 
 //
-// Factory display for Creality CR-10
+// Factory display for Creality CR-10 / CR-7 / Ender-3
 // https://www.aliexpress.com/item/32833148327.html
+//
+// Connect to EXP1 on RAMPS and compatible boards.
 //
 // This is RAMPS-compatible using a single 10-pin connector.
 // (For CR-10 owners who want to replace the Melzi Creality board but retain the display)
@@ -3143,6 +3151,10 @@
  *
  * CREALITY_TOUCH
  *  - CR-6 OEM touch screen. A DWIN display with touch.
+ * 
+ * E3S1PRO (T5UID1)
+ *  - Download https://github.com/CrealityOfficial/Ender-3S1/archive/3S1_Plus_Screen.zip
+ *  - Copy the downloaded DWIN_SET folder to the SD card.
  *
  * Flash display with DGUS Displays for Marlin:
  *  - Format the SD card to FAT32 with an allocation size of 4kb.
@@ -3150,7 +3162,7 @@
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
  *
- * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY' ]
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY', 'E3S1PRO' ]
  */
 //#define DGUS_LCD_UI ORIGIN
 #if DGUS_UI_IS(MKS)
@@ -3222,6 +3234,7 @@
 //
 // 480x320, 3.5", SPI Display with Rotary Encoder from MKS
 // Usually paired with MKS Robin Nano V2 & V3
+// https://github.com/makerbase-mks/MKS-TFT-Hardware/tree/master/MKS%20TS35
 //
 //#define MKS_TS35_V2_0
 
@@ -3286,12 +3299,14 @@
 //#define ANET_ET5_TFT35
 
 //
-// 1024x600, 7", RGB Stock Display with Rotary Encoder from BIQU-BX
+// 1024x600, 7", RGB Stock Display with Rotary Encoder from BIQU BX
+// https://github.com/bigtreetech/BIQU-BX/tree/master/Hardware
 //
 //#define BIQU_BX_TFT70
 
 //
 // 480x320, 3.5", SPI Stock Display with Rotary Encoder from BIQU B1 SE Series
+// https://github.com/bigtreetech/TFT35-SPI/tree/master/v1
 //
 //#define BTT_TFT35_SPI_V1_0
 
@@ -3339,6 +3354,8 @@
   #define TFT_FONT  NOTOSANS
 
   //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
+
+  #define COMPACT_MARLIN_BOOT_LOGO  // Use compressed data to save Flash space.
 #endif
 
 #if ENABLED(TFT_LVGL_UI)
