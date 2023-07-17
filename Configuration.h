@@ -1231,7 +1231,11 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 138 } // 0.9 deg E3D motor + GT2 belt for X and Y, 1.8 deg Creality motors + TR8x2 screws for Z, Micro-Swiss Bowden extruder for E CUSTOMIZED_EDITED
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 276 } // CUSTOMIZED_EDITED
+//0.9 deg E3D motor + GT2 belt for X
+//0.9 deg E3D motor + GT2 belt for Y
+//1.8 deg Creality motors + TR8x2 screws for Z
+//0.9 deg E3D motor + Micro-Swiss Bowden extruder for E
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -3352,6 +3356,15 @@
    * HELVETICA - Lightweight font, no anti-aliasing. Supports Basic Latin (0x0020-0x007F) and Latin-1 Supplement (0x0080-0x00FF) characters only.
    */
   #define TFT_FONT  NOTOSANS
+
+  /**
+   * TFT Theme for Color_UI. Choose one of the following or add a new one to 'Marlin/src/lcd/tft/themes' directory
+   *
+   * BLUE_MARLIN  - Default theme with 'midnight blue' background
+   * BLACK_MARLIN - Theme with 'black' background
+   * ANET_BLACK   - Theme used for Anet ET4/5
+   */
+  #define TFT_THEME BLACK_MARLIN
 
   //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
 
