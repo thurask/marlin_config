@@ -902,8 +902,16 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
-//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
+
+//
+// MarkForged Kinematics
+// See https://reprap.org/forum/read.php?152,504042
+//
+//#define MARKFORGED_XY
 //#define MARKFORGED_YX
+#if ANY(MARKFORGED_XY, MARKFORGED_YX)
+  //#define MARKFORGED_INVERSE  // Enable for an inverted Markforged kinematics belt path
+#endif
 
 // Enable for a belt style printer with endless "Z" motion
 //#define BELTPRINTER
@@ -1894,11 +1902,11 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR // CUSTOMIZED_EDITED
+#define FILAMENT_RUNOUT_SENSOR // BTT SFS v2 CUSTOMIZED_EDITED
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
-
+  // PC2, E0DET header // CUSTOMIZED_EDITED
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
   #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
@@ -1952,13 +1960,13 @@
     // Enable this option to use an encoder disc that toggles the runout pin
     // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
     // large enough to avoid false positives.)
-    //#define FILAMENT_MOTION_SENSOR
+    #define FILAMENT_MOTION_SENSOR
 
     #if ENABLED(FILAMENT_MOTION_SENSOR)
-      //#define FILAMENT_SWITCH_AND_MOTION
+      #define FILAMENT_SWITCH_AND_MOTION // CUSTOMIZED_EDITED
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
         #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
-        //#define FIL_MOTION1_PIN    -1
+        #define FIL_MOTION1_PIN   PA0          // PA0, E1DET header // CUSTOMIZED_EDITED
 
         // Override individually if the motion sensors vary
         //#define FIL_MOTION1_STATE LOW
