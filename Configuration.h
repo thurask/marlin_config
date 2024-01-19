@@ -102,7 +102,7 @@
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_2 -1 // SKR 3 CUSTOMIZED_EDITED
-//#define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
+#define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
  * Select a third serial port on the board to use for communication with the host.
@@ -110,7 +110,7 @@
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_3 3 // SKR 3 with WiFi CUSTOMIZED_EDITED
-//#define BAUDRATE_3 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
+#define BAUDRATE_3 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
  * Select a serial port to communicate with RS485 protocol
@@ -404,13 +404,13 @@
  * Specify whether the power supply is active HIGH or active LOW.
  */
 //#define PSU_CONTROL
-//#define PSU_NAME "Power Supply"
+#define PSU_NAME "Power Supply"  // CUSTOMIZED_EDITED
 
 #if ENABLED(PSU_CONTROL)
   //#define MKS_PWC                 // Using the MKS PWC add-on
   //#define PS_OFF_CONFIRM          // Confirm dialog when power off
   //#define PS_OFF_SOUND            // Beep 1s when power off
-  #define PSU_ACTIVE_STATE LOW      // Set 'LOW' for ATX, 'HIGH' for X-Box
+  #define PSU_ACTIVE_STATE HIGH      // Set 'LOW' for ATX, 'HIGH' for X-Box  // CUSTOMIZED_EDITED
 
   //#define PSU_DEFAULT_OFF               // Keep power off until enabled directly with M80
   //#define PSU_POWERUP_DELAY      250    // (ms) Delay for the PSU to warm up to full power
@@ -691,9 +691,9 @@
     #define DEFAULT_Ki_LIST {   0.756,   0.756 }
     #define DEFAULT_Kd_LIST { 106.145, 106.145 }
   #else
-    #define DEFAULT_Kp 25.42
-    #define DEFAULT_Ki 2.67
-    #define DEFAULT_Kd 60.51
+    #define DEFAULT_Kp 20.68
+    #define DEFAULT_Ki 1.83
+    #define DEFAULT_Kd 58.31
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -780,9 +780,9 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // Gulfcoast Robotics bed and heater
-  #define DEFAULT_bedKp 73.22 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 11.89 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 300.69 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 74.58 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 10.13 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 365.95 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1244,7 +1244,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 276 } // CUSTOMIZED_EDITED
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 278.39 } // CUSTOMIZED_EDITED
 //0.9 deg E3D motor + GT2 belt for X
 //0.9 deg E3D motor + GT2 belt for Y
 //1.8 deg Creality motors + TR8x2 screws for Z
@@ -1834,10 +1834,10 @@
 #define Y_BED_SIZE 235 // CUSTOMIZED_EDITED
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0 // Micro-Swiss rail + extruder kit CUSTOMIZED_EDITED
-#define Y_MIN_POS -16 // Gulfcoast Robotics rail kit CUSTOMIZED_EDITED
+#define X_MIN_POS -2 // Gulfcoast Robotics rail + Micro-Swiss extruder kit CUSTOMIZED_EDITED
+#define Y_MIN_POS -7 // Gulfcoast Robotics rail kit CUSTOMIZED_EDITED
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 17 // CUSTOMIZED_EDITED
+#define X_MAX_POS X_BED_SIZE + 15 // CUSTOMIZED_EDITED
 #define Y_MAX_POS Y_BED_SIZE // CUSTOMIZED_EDITED
 #define Z_MAX_POS 350 // extended vertical extrusions CUSTOMIZED_EDITED
 //#define I_MIN_POS 0
@@ -2958,7 +2958,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER // CUSTOMIZED_EDITED
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER  // CUSTOMIZED_EDITED
 
 //
 // K.3D Full Graphic Smart Controller
@@ -3057,7 +3057,7 @@
 // BigTreeTech Mini 12864 V1.0 / V2.0 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
 // https://github.com/bigtreetech/MINI-12864
 //
-//#define BTT_MINI_12864
+#define BTT_MINI_12864  // CUSTOMIZED_EDITED
 
 //
 // BEEZ MINI 12864 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
@@ -3070,7 +3070,7 @@
 //
 // Connect to EXP1 on RAMPS and compatible boards.
 //
-//#define CR10_STOCKDISPLAY
+//#define CR10_STOCKDISPLAY  // CUSTOMIZED_EDITED
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
