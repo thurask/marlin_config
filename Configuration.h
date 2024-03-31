@@ -79,7 +79,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 1 // SKR 3 CUSTOMIZED_EDITED
+#define SERIAL_PORT 1 // SKR 3 TFT // CUSTOMIZED_EDITED
 
 /**
  * Serial Port Baud Rate
@@ -101,7 +101,7 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 -1 // SKR 3 CUSTOMIZED_EDITED
+#define SERIAL_PORT_2 -1 // SKR 3 USB // CUSTOMIZED_EDITED
 #define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
@@ -109,7 +109,7 @@
  * Currently only supported for AVR, DUE, LPC1768/9 and STM32/STM32F1
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_3 3 // SKR 3 with WiFi CUSTOMIZED_EDITED
+#define SERIAL_PORT_3 3 // SKR 3 WiFi // CUSTOMIZED_EDITED
 #define BAUDRATE_3 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
@@ -564,7 +564,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1022 // Amazon Pt1000 with the 2k2 resistor jumper set CUSTOMIZED_EDITED
+#define TEMP_SENSOR_0 1022 // Amazon Pt1000 with the 2k2 resistor jumper set // CUSTOMIZED_EDITED
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -572,7 +572,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 11 // Gulfcoast Robotics bed with a 3950 CUSTOMIZED_EDITED
+#define TEMP_SENSOR_BED 11 // Gulfcoast Robotics bed with a 3950 // CUSTOMIZED_EDITED
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -700,9 +700,9 @@
     #define DEFAULT_Ki_LIST {   0.756,   0.756 }
     #define DEFAULT_Kd_LIST { 106.145, 106.145 }
   #else
-    #define DEFAULT_Kp 20.62
-    #define DEFAULT_Ki 1.83
-    #define DEFAULT_Kd 58.16
+    #define DEFAULT_Kp 24.09
+    #define DEFAULT_Ki 2.35
+    #define DEFAULT_Kd 61.66
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -789,9 +789,9 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // Gulfcoast Robotics bed and heater
-  #define DEFAULT_bedKp 69.85 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKi 10.65 // CUSTOMIZED_EDITED
-  #define DEFAULT_bedKd 305.46 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKp 83.96 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKi 12.64 // CUSTOMIZED_EDITED
+  #define DEFAULT_bedKd 371.65 // CUSTOMIZED_EDITED
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1602,7 +1602,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -49.3, -8, 0.0 } // CUSTOMIZED_EDITED
+#define NOZZLE_TO_PROBE_OFFSET { -49.3, -8, 0.0 } // Satsana dual 5015 duct // CUSTOMIZED_EDITED
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1668,7 +1668,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#define MULTIPLE_PROBING   2 // CUSTOMIZED_EDITED
+#define MULTIPLE_PROBING   3 // CUSTOMIZED_EDITED
 //#define EXTRA_PROBING    1
 
 /**
@@ -2442,8 +2442,8 @@
 #define PREHEAT_3_FAN_SPEED     0 // Value from 0 to 255 // CUSTOMIZED_EDITED
 
 #define PREHEAT_4_LABEL       "ABS" // CUSTOMIZED_EDITED
-#define PREHEAT_4_TEMP_HOTEND 240 // CUSTOMIZED_EDITED
-#define PREHEAT_4_TEMP_BED    100 // CUSTOMIZED_EDITED
+#define PREHEAT_4_TEMP_HOTEND 260 // CUSTOMIZED_EDITED
+#define PREHEAT_4_TEMP_BED     95 // CUSTOMIZED_EDITED
 #define PREHEAT_4_TEMP_CHAMBER 35 // CUSTOMIZED_EDITED
 #define PREHEAT_4_FAN_SPEED     0 // Value from 0 to 255 // CUSTOMIZED_EDITED
 
@@ -2675,9 +2675,9 @@
 #define DISPLAY_CHARSET_HD44780 WESTERN // CUSTOMIZED_EDITED
 
 /**
- * Info Screen Style (0:Classic, 1:Průša)
+ * Info Screen Style (0:Classic, 1:Průša, 2:CNC)
  *
- * :[0:'Classic', 1:'Průša']
+ * :[0:'Classic', 1:'Průša', 2:'CNC']
  */
 #define LCD_INFO_SCREEN_STYLE 0
 
