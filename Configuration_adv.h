@@ -2720,7 +2720,7 @@
  * This feature is EXPERIMENTAL so use with caution and test thoroughly.
  * Enable this option to receive data on the serial ports via the onboard DMA
  * controller for more stable and reliable high-speed serial communication.
- * Only some STM32 MCUs are currently supported.
+ * Support is currently limited to some STM32 MCUs and all HC32 MCUs.
  * Note: This has no effect on emulated USB serial ports.
  */
 //#define SERIAL_DMA
@@ -3587,7 +3587,7 @@
  * Add the M3, M4, and M5 commands to turn the spindle/laser on and off, and
  * to set spindle speed, spindle direction, and laser power.
  *
- * SuperPid is a router/spindle speed controller used in the CNC milling community.
+ * SuperPID is a router/spindle speed controller used in the CNC milling community.
  * Marlin can be used to turn the spindle on and off. It can also be used to set
  * the spindle speed from 5,000 to 30,000 RPM.
  *
@@ -3973,7 +3973,7 @@
 /**
  * Support for MeatPack G-code compression (https://github.com/scottmudge/OctoPrint-MeatPack)
  */
-//#define MEATPACK_ON_SERIAL_PORT_1 // SKR3 not USB? CUSTOMIZED_EDITED
+//#define MEATPACK_ON_SERIAL_PORT_1 // SKR3 WiFi (3) or TFT (-1) CUSTOMIZED_EDITED
 #define MEATPACK_ON_SERIAL_PORT_2 // SKR3 USB CUSTOMIZED_EDITED
 
 //#define GCODE_CASE_INSENSITIVE  // Accept G-code sent to the firmware in lowercase
@@ -4298,7 +4298,8 @@
 
 /**
  * Instant freeze / unfreeze functionality
- * Potentially useful for emergency stop that allows being resumed.
+ * Potentially useful for rapid stop that allows being resumed. Halts stepper movement.
+ * Note this does NOT pause spindles, lasers, fans, heaters or any other auxiliary device.
  * @section interface
  */
 //#define FREEZE_FEATURE
@@ -4379,7 +4380,7 @@
  * Extras for an ESP32-based motherboard with WIFISUPPORT
  * These options don't apply to add-on WiFi modules based on ESP32 WiFi101.
  */
-#if ENABLED(WIFISUPPORT)
+#if ANY(WIFISUPPORT, ESP3D_WIFISUPPORT)
   //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery) using SPIFFS
   //#define OTASUPPORT          // Support over-the-air firmware updates
   //#define WIFI_CUSTOM_COMMAND // Accept feature config commands (e.g., WiFi ESP3D) from the host
