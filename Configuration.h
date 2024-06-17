@@ -700,9 +700,9 @@
     #define DEFAULT_Ki_LIST {   0.756,   0.756 }
     #define DEFAULT_Kd_LIST { 106.145, 106.145 }
   #else
-    #define DEFAULT_Kp 24.09
-    #define DEFAULT_Ki 2.35
-    #define DEFAULT_Kd 61.66
+    #define DEFAULT_Kp 22.15
+    #define DEFAULT_Ki 2.01
+    #define DEFAULT_Kd 61.14
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -3462,7 +3462,9 @@
   #define BUTTON_DELAY_EDIT      50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU     250 // (ms) Button repeat delay for menus
 
-  //#define DISABLE_ENCODER         // Disable the click encoder, if any
+  #if ANY(TFT_CLASSIC_UI, TFT_COLOR_UI)
+    //#define NO_BACK_MENU_ITEM     // Don't display a top menu item to go back to the parent menu
+  #endif
 
   #define TOUCH_SCREEN_CALIBRATION
 
