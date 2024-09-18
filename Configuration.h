@@ -106,7 +106,7 @@
 
 /**
  * Select a third serial port on the board to use for communication with the host.
- * Currently only supported for AVR, DUE, LPC1768/9 and STM32/STM32F1
+ * Currently supported for AVR, DUE, SAMD51, LPC1768/9, STM32/STM32F1/HC32, and Teensy 4.x
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
 #define SERIAL_PORT_3 1     // SKR 3 TFT // CUSTOMIZED_EDITED
@@ -145,7 +145,7 @@
  * Options: A4988, A5984, DRV8825, LV8729, TB6560, TB6600, TMC2100,
  *          TMC2130, TMC2130_STANDALONE, TMC2160, TMC2160_STANDALONE,
  *          TMC2208, TMC2208_STANDALONE, TMC2209, TMC2209_STANDALONE,
- *          TMC2660, TMC2660_STANDALONE, TMC5130, TMC5130_STANDALONE, 
+ *          TMC2660, TMC2660_STANDALONE, TMC5130, TMC5130_STANDALONE,
  *          TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
@@ -387,14 +387,15 @@
  *   PRUSA_MMU1           : Průša MMU1 (The "multiplexer" version)
  *   PRUSA_MMU2           : Průša MMU2
  *   PRUSA_MMU2S          : Průša MMU2S (Requires MK3S extruder with motion sensor, EXTRUDERS = 5)
+ *   PRUSA_MMU3           : Průša MMU3  (Requires MK3S extruder with motion sensor and MMU firmware version 3.x.x, EXTRUDERS = 5)
  *   EXTENDABLE_EMU_MMU2  : MMU with configurable number of filaments (ERCF, SMuFF or similar with Průša MMU2 compatible firmware)
  *   EXTENDABLE_EMU_MMU2S : MMUS with configurable number of filaments (ERCF, SMuFF or similar with Průša MMU2 compatible firmware)
  *
  * Requires NOZZLE_PARK_FEATURE to park print head in case MMU unit fails.
  * See additional options in Configuration_adv.h.
- * :["PRUSA_MMU1", "PRUSA_MMU2", "PRUSA_MMU2S", "EXTENDABLE_EMU_MMU2", "EXTENDABLE_EMU_MMU2S"]
+ * :["PRUSA_MMU1", "PRUSA_MMU2", "PRUSA_MMU2S", "PRUSA_MMU3", "EXTENDABLE_EMU_MMU2", "EXTENDABLE_EMU_MMU2S"]
  */
-//#define MMU_MODEL PRUSA_MMU2
+//#define MMU_MODEL PRUSA_MMU3
 
 // @section psu control
 
@@ -413,9 +414,9 @@
   //#define PS_OFF_SOUND            // Beep 1s when power off
   #define PSU_ACTIVE_STATE HIGH      // Set 'LOW' for ATX, 'HIGH' for X-Box  // CUSTOMIZED_EDITED
 
-  //#define PSU_DEFAULT_OFF               // Keep power off until enabled directly with M80
-  //#define PSU_POWERUP_DELAY      250    // (ms) Delay for the PSU to warm up to full power
-  //#define LED_POWEROFF_TIMEOUT 10000    // (ms) Turn off LEDs after power-off, with this amount of delay
+  //#define PSU_DEFAULT_OFF             // Keep power off until enabled directly with M80
+  //#define PSU_POWERUP_DELAY      250  // (ms) Delay for the PSU to warm up to full power
+  //#define LED_POWEROFF_TIMEOUT 10000  // (ms) Turn off LEDs after power-off, with this amount of delay
 
   //#define PSU_OFF_REDUNDANT           // Second pin for redundant power control
   //#define PSU_OFF_REDUNDANT_INVERTED  // Redundant pin state is the inverse of PSU_ACTIVE_STATE
@@ -697,13 +698,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  17.915,  17.915 }
-    #define DEFAULT_Ki_LIST {   0.756,   0.756 }
-    #define DEFAULT_Kd_LIST { 106.145, 106.145 }
+    #define DEFAULT_Kp_LIST {  17.915,  17.915 } // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki_LIST {   0.756,   0.756 } // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd_LIST { 106.145, 106.145 } // CUSTOMIZED_EDITED
   #else
-    #define DEFAULT_Kp 22.15
-    #define DEFAULT_Ki 2.01
-    #define DEFAULT_Kd 61.14
+    #define DEFAULT_Kp 22.15 // CUSTOMIZED_EDITED
+    #define DEFAULT_Ki 2.01  // CUSTOMIZED_EDITED
+    #define DEFAULT_Kd 61.14 // CUSTOMIZED_EDITED
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -715,12 +716,15 @@
  * Use a physical model of the hotend to control temperature. When configured correctly this gives
  * better responsiveness and stability than PID and removes the need for PID_EXTRUSION_SCALING
  * and PID_FAN_SCALING. Enable MPC_AUTOTUNE and use M306 T to autotune the model.
- * @section mpctemp
+ * @section mpc temp
  */
 #if ENABLED(MPCTEMP)
-  #define MPC_AUTOTUNE                              // Include a method to do MPC auto-tuning (~6.3K bytes of flash)
-  #define MPC_EDIT_MENU                             // Add MPC editing to the "Advanced Settings" menu. (~1.3K bytes of flash)
-  #define MPC_AUTOTUNE_MENU                         // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash)
+  #define MPC_AUTOTUNE                                // Include a method to do MPC auto-tuning (~6.3K bytes of flash)
+  #if ENABLED(MPC_AUTOTUNE)
+    //#define MPC_AUTOTUNE_DEBUG                      // Enable MPC debug logging (~870 bytes of flash)
+  #endif
+  #define MPC_EDIT_MENU                               // Add MPC editing to the "Advanced Settings" menu. (~1.3K bytes of flash) // CUSTOMIZED_EDITED
+  #define MPC_AUTOTUNE_MENU                           // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash) // CUSTOMIZED_EDITED
 
   #define MPC_MAX 255                                 // (0..255) Current to nozzle while MPC is active.
   #define MPC_HEATER_POWER { 40.0f }                  // (W) Heat cartridge powers.
@@ -839,13 +843,15 @@
   // Lasko "MyHeat Personal Heater" (200w) modified with a Fotek SSR-10DA to control only the heating element
   // and placed inside the small Creality printer enclosure tent.
   //
-  #define DEFAULT_chamberKp 37.04
-  #define DEFAULT_chamberKi 1.40
+  #define DEFAULT_chamberKp  37.04
+  #define DEFAULT_chamberKi   1.40
   #define DEFAULT_chamberKd 655.17
   // M309 P37.04 I1.04 D655.17
 
   // FIND YOUR OWN: "M303 E-2 C8 S50" to run autotune on the chamber at 50 degreesC for 8 cycles.
 #endif // PIDTEMPCHAMBER
+
+// @section pid temp
 
 #if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -1291,14 +1297,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          500  // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  800  // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000  // X, Y, Z acceleration for travel (non printing) moves
-
-#if ENABLED(AXIS4_ROTATES)
-  #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
-  #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
-#endif
+#define DEFAULT_ACCELERATION          500  // X, Y, Z and E acceleration for printing moves // CUSTOMIZED_EDITED
+#define DEFAULT_RETRACT_ACCELERATION  800  // E acceleration for retracts // CUSTOMIZED_EDITED
+#define DEFAULT_TRAVEL_ACCELERATION   1000  // X, Y, Z acceleration for travel (non printing) moves // CUSTOMIZED_EDITED
 
 /**
  * Default Jerk limits (mm/s)
@@ -1313,7 +1314,7 @@
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
   #define DEFAULT_ZJERK  0.3
-  #define DEFAULT_EJERK 5.0
+  #define DEFAULT_EJERK  5.0
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
   //#define DEFAULT_KJERK  0.3
@@ -1468,19 +1469,20 @@
   //#define BD_SENSOR_PROBE_NO_STOP // Probe bed without stopping at each probe point
 #endif
 
-// A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
-//#define SOLENOID_PROBE
-
 /**
  * BIQU MicroProbe
  *
  * A lightweight, solenoid-driven probe.
  * For information about this sensor https://github.com/bigtreetech/MicroProbe
  *
- * Also requires: PROBE_ENABLE_DISABLE
+ * Also requires PROBE_ENABLE_DISABLE
+ * With FT_MOTION requires ENDSTOP_INTERRUPTS_FEATURE
  */
 //#define BIQU_MICROPROBE_V1  // Triggers HIGH
 //#define BIQU_MICROPROBE_V2  // Triggers LOW
+
+// A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
+//#define SOLENOID_PROBE
 
 // A sled-mounted probe like those designed by Charles Bell.
 //#define Z_PROBE_SLED
@@ -1646,6 +1648,7 @@
   #define PROBE_TARE_DELAY 200    // (ms) Delay after tare before
   #define PROBE_TARE_STATE HIGH   // State to write pin for tare
   //#define PROBE_TARE_PIN PA5    // Override default pin
+  //#define PROBE_TARE_MENU       // Display a menu item to tare the probe
   #if ENABLED(PROBE_ACTIVATION_SWITCH)
     //#define PROBE_TARE_ONLY_WHILE_INACTIVE  // Fail to tare/probe if PROBE_ACTIVATION_SWITCH is active
   #endif
@@ -1683,14 +1686,14 @@
  * probe Z Offset set with NOZZLE_TO_PROBE_OFFSET, M851, or the LCD.
  * Only integer values >= 1 are valid here.
  *
- * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
- *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
+ * Example: 'M851 Z-5' with a CLEARANCE of 4  =>  9mm from bed to nozzle.
+ *     But: 'M851 Z+1' with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
 #define Z_CLEARANCE_DEPLOY_PROBE   10 // (mm) Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // (mm) Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // (mm) Z Clearance between multiple probes
 #define Z_PROBE_ERROR_TOLERANCE     3 // (mm) Tolerance for early trigger (<= -probe.offset.z + ZPET)
-#define Z_AFTER_PROBING             5 // (mm) Z position after probing is done
+#define Z_AFTER_PROBING             5 // (mm) Z position after probing is done // CUSTOMIZED_EDITED
 
 #define Z_PROBE_LOW_POINT          -5 // (mm) Farthest distance below the trigger-point to go before stopping // CUSTOMIZED_EDITED
 
@@ -1699,8 +1702,8 @@
 //#define PROBE_OFFSET_XMAX  50   // (mm)
 //#define PROBE_OFFSET_YMIN -50   // (mm)
 //#define PROBE_OFFSET_YMAX  50   // (mm)
-#define PROBE_OFFSET_ZMIN -20   // (mm)
-#define PROBE_OFFSET_ZMAX  20   // (mm)
+#define PROBE_OFFSET_ZMIN -20     // (mm) // CUSTOMIZED_EDITED
+#define PROBE_OFFSET_ZMAX  20     // (mm) // CUSTOMIZED_EDITED
 
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST // CUSTOMIZED_EDITED
@@ -1911,7 +1914,7 @@
 
 /**
  * @section filament runout sensors
- * 
+ *
  * Filament Runout Sensors
  * Mechanical or opto endstops are used to check for the presence of filament.
  *
@@ -1924,7 +1927,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR // BTT SFS v2 CUSTOMIZED_EDITED
+#define FILAMENT_RUNOUT_SENSOR // BTT SFS v2 // CUSTOMIZED_EDITED
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
@@ -1982,7 +1985,7 @@
     // Enable this option to use an encoder disc that toggles the runout pin
     // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
     // large enough to avoid false positives.)
-    #define FILAMENT_MOTION_SENSOR
+    #define FILAMENT_MOTION_SENSOR // CUSTOMIZED_EDITED
 
     #if ENABLED(FILAMENT_MOTION_SENSOR)
       #define FILAMENT_SWITCH_AND_MOTION // CUSTOMIZED_EDITED
@@ -2118,12 +2121,6 @@
   #endif
 
   /**
-   * Add Z offset (M424 Z) that applies to all moves at the planner level.
-   * This Z offset will be automatically set to the middle value with G29.
-   */
-  //#define GLOBAL_MESH_Z_OFFSET
-
-  /**
    * For Cartesian machines, instead of dividing moves on mesh boundaries,
    * split up moves into short segments like a Delta. This follows the
    * contours of the bed more closely than edge-to-edge straight moves.
@@ -2160,7 +2157,7 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    #define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID // CUSTOMIZED_EDITED
 
     //
     // Subdivision of the grid by Catmull-Rom method.
@@ -2454,7 +2451,7 @@
 
 /**
  * @section nozzle park
- * 
+ *
  * Nozzle Park
  *
  * Park the nozzle at the given XYZ position on idle or G27.
@@ -2478,7 +2475,7 @@
 
 /**
  * @section nozzle clean
- * 
+ *
  * Clean Nozzle Feature
  *
  * Adds the G12 command to perform a nozzle cleaning process.
@@ -2524,7 +2521,7 @@
   // Default pattern to use when 'P' is not provided to G12. One of the enabled options above.
   #define NOZZLE_CLEAN_DEFAULT_PATTERN 0
 
-  #define NOZZLE_CLEAN_STROKES   12   // Default number of pattern repetitions
+  #define NOZZLE_CLEAN_STROKES     12   // Default number of pattern repetitions
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_ZIGZAG)
     #define NOZZLE_CLEAN_TRIANGLES  3   // Default number of triangles
@@ -3089,7 +3086,7 @@
 //
 // Connect to EXP1 on RAMPS and compatible boards.
 //
-//#define CR10_STOCKDISPLAY  // CUSTOMIZED_EDITED
+//#define CR10_STOCKDISPLAY
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
@@ -3216,14 +3213,11 @@
  * IA_CREALITY (T5UID1)
  *  - Download https://github.com/InsanityAutomation/Marlin/raw/CrealityDwin_2.0/TM3D_Combined480272_Landscape_V7.7z
  *  - Copy the downloaded DWIN_SET folder to the SD card.
- * 
+ *
  * E3S1PRO (T5L)
  *  - Download https://github.com/CrealityOfficial/Ender-3S1/archive/3S1_Plus_Screen.zip
  *  - Copy the downloaded DWIN_SET folder to the SD card.
  *
- * CREALITY_TOUCH
- *  - CR-6 OEM touch screen. A DWIN display with touch.
- * 
  * Flash display with DGUS Displays for Marlin:
  *  - Format the SD card to FAT32 with an allocation size of 4kb.
  *  - Download files as specified for your type of display.
@@ -3273,11 +3267,6 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 //#define NEXTION_TFT
-
-// PanelDue touch controller by Escher3D
-// http://escher3d.com/pages/order/products/product2.php
-//
-//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
