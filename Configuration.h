@@ -61,7 +61,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Thurask, Ender 3 Pro SKR3 EZ)" // Who made the changes. // CUSTOMIZED_EDITED
+#define STRING_CONFIG_H_AUTHOR "(Thurask, Ender 3 Pro SKR3 EZ)" // Original author or contributor. // CUSTOMIZED_EDITED
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -70,6 +70,8 @@
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_BTT_SKR_V3_0_EZ // CUSTOMIZED_EDITED
 #endif
+
+// @ section serial
 
 /**
  * Select the serial port on the board to use for communication with the host.
@@ -803,6 +805,40 @@
   //#define BED_LIMIT_SWITCHING   // Keep the bed temperature within BED_HYSTERESIS of the target
 #endif
 
+/**
+ * Peltier Bed - Heating and Cooling
+ *
+ * A Peltier device transfers heat from one side to the other in proportion to the amount of
+ * current flowing through the device and the direction of current flow. So the same device
+ * can both heat and cool.
+ *
+ * When "cooling" in addition to rejecting the heat transferred from the hot side to the cold
+ * side, the dissipated power (voltage * current) must also be rejected. Be sure to set up a
+ * fan that can be powered in sync with the Peltier unit.
+ *
+ * This feature is only set up to run in bang-bang mode because Peltiers don't handle PWM
+ * well without filter circuitry.
+ *
+ * Since existing 3D printers are made to handle relatively high current for the heated bed,
+ * we can use the heated bed power pins to control the Peltier power using the same G-codes
+ * as the heated bed (M140, M190, etc.).
+ *
+ * A second GPIO pin is required to control current direction.
+ * Two configurations are possible: Relay and H-Bridge
+ *
+ * (At this time only relay is supported. H-bridge requires 4 MOS switches configured in H-Bridge.)
+ *
+ * Power is handled by the bang-bang control loop: 0 or 255.
+ * Cooling applications are more common than heating, so the pin states are commonly:
+ *   LOW  = Heating = Relay Energized
+ *   HIGH = Cooling = Relay in "Normal" state
+ */
+//#define PELTIER_BED
+#if ENABLED(PELTIER_BED)
+  #define PELTIER_DIR_PIN           -1  // Relay control pin for Peltier
+  #define PELTIER_DIR_HEAT_STATE   LOW  // The relay pin state that causes the Peltier to heat
+#endif
+
 // Add 'M190 R T' for more gradual M190 R bed cooling.
 //#define BED_ANNEALING_GCODE
 
@@ -908,7 +944,7 @@
 //============================= Mechanical Settings =========================
 //===========================================================================
 
-// @section machine
+// @section kinematics
 
 // Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
@@ -931,6 +967,15 @@
 
 // Enable for a belt style printer with endless "Z" motion
 //#define BELTPRINTER
+
+// Articulated robot (arm). Joints are directly mapped to axes with no kinematics.
+//#define ARTICULATED_ROBOT_ARM
+
+// For a hot wire cutter with parallel horizontal axes (X, I) where the heights of the two wire
+// ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
+//#define FOAMCUTTER_XYUV
+
+// @section polargraph
 
 // Enable for Polargraph Kinematics
 //#define POLARGRAPH
@@ -1117,15 +1162,6 @@
 
   #define FEEDRATE_SCALING                  // Convert XY feedrate from mm/s to degrees/s on the fly
 #endif
-
-// @section machine
-
-// Articulated robot (arm). Joints are directly mapped to axes with no kinematics.
-//#define ARTICULATED_ROBOT_ARM
-
-// For a hot wire cutter with parallel horizontal axes (X, I) where the heights of the two wire
-// ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
-//#define FOAMCUTTER_XYUV
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1617,15 +1653,15 @@
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
 #define PROBING_MARGIN 5 // CUSTOMIZED_EDITED
 
-// X and Y axis travel speed (mm/min) between probes.
+// X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
-#define XY_PROBE_FEEDRATE (133*60)
+#define XY_PROBE_FEEDRATE (133*60) // (mm/min)
 
-// Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (4*60)
+// Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
+#define Z_PROBE_FEEDRATE_FAST (4*60) // (mm/min)
 
-// Feedrate (mm/min) for the "accurate" probe of each point
-#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
+// Feedrate for the "accurate" probe of each point
+#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2) // (mm/min)
 
 /**
  * Probe Activation Switch
@@ -1742,17 +1778,17 @@
 // @section stepper drivers
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
-// :{ 0:'Low', 1:'High' }
-#define X_ENABLE_ON 0
-#define Y_ENABLE_ON 0
-#define Z_ENABLE_ON 0
-#define E_ENABLE_ON 0 // For all extruders
-//#define I_ENABLE_ON 0
-//#define J_ENABLE_ON 0
-//#define K_ENABLE_ON 0
-//#define U_ENABLE_ON 0
-//#define V_ENABLE_ON 0
-//#define W_ENABLE_ON 0
+// :['LOW', 'HIGH']
+#define X_ENABLE_ON LOW
+#define Y_ENABLE_ON LOW
+#define Z_ENABLE_ON LOW
+#define E_ENABLE_ON LOW // For all extruders
+//#define I_ENABLE_ON LOW
+//#define J_ENABLE_ON LOW
+//#define K_ENABLE_ON LOW
+//#define U_ENABLE_ON LOW
+//#define V_ENABLE_ON LOW
+//#define W_ENABLE_ON LOW
 
 // Disable axis steppers immediately when they're not being stepped.
 // WARNING: When motors turn off there is a chance of losing position accuracy!
@@ -2027,9 +2063,9 @@
         //#define FIL_MOTION8_PULLUP
         //#define FIL_MOTION8_PULLDOWN
       #endif
-    #endif
-  #endif
-#endif
+    #endif // FILAMENT_MOTION_SENSOR
+  #endif // FILAMENT_RUNOUT_DISTANCE_MM
+#endif // FILAMENT_RUNOUT_SENSOR
 
 //===========================================================================
 //=============================== Bed Leveling ==============================
@@ -3443,6 +3479,8 @@
  *   TFT_ROTATE_180, TFT_ROTATE_180_MIRROR_X, TFT_ROTATE_180_MIRROR_Y,
  *   TFT_ROTATE_270, TFT_ROTATE_270_MIRROR_X, TFT_ROTATE_270_MIRROR_Y,
  *   TFT_MIRROR_X, TFT_MIRROR_Y, TFT_NO_ROTATION
+ * 
+ *   :{ 'TFT_NO_ROTATION':'None', 'TFT_ROTATE_90':'90°', 'TFT_ROTATE_90_MIRROR_X':'90° (Mirror X)', 'TFT_ROTATE_90_MIRROR_Y':'90° (Mirror Y)', 'TFT_ROTATE_180':'180°', 'TFT_ROTATE_180_MIRROR_X':'180° (Mirror X)', 'TFT_ROTATE_180_MIRROR_Y':'180° (Mirror Y)', 'TFT_ROTATE_270':'270°', 'TFT_ROTATE_270_MIRROR_X':'270° (Mirror X)', 'TFT_ROTATE_270_MIRROR_Y':'270° (Mirror Y)', 'TFT_MIRROR_X':'Mirror X', 'TFT_MIRROR_Y':'Mirror Y' }
  */
 //#define TFT_ROTATION TFT_NO_ROTATION
 
@@ -3595,16 +3633,16 @@
 #if ENABLED(NEOPIXEL_LED)
   #define NEOPIXEL_TYPE           NEO_RGB // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc. // CUSTOMIZED_EDITED
                                           // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
-  //#define NEOPIXEL_PIN                4 // LED driving pin
-  #define NEOPIXEL2_TYPE          NEO_GRB // CUSTOMIZED_EDITED
-  #define NEOPIXEL2_PIN               PD0 // CUSTOMIZED_EDITED
+  //#define NEOPIXEL_PIN                4 // LED driving pin // RGB lights on Mini12864 display // CUSTOMIZED_EDITED
+  #define NEOPIXEL2_TYPE          NEO_RGBW // RGB connector on motherboard // CUSTOMIZED_EDITED
+  #define NEOPIXEL2_PIN               PE6 // CUSTOMIZED_EDITED
   #define NEOPIXEL_PIXELS               3 // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.) // CUSTOMIZED_EDITED
   #define NEOPIXEL_IS_SEQUENTIAL          // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS         255 // Initial brightness (0-255) // CUSTOMIZED_EDITED
   #define NEOPIXEL_STARTUP_TEST           // Cycle through colors at startup // CUSTOMIZED_EDITED
 
   // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
-  #define NEOPIXEL2_SEPARATE // CUSTOMIZED_EDITED
+  //#define NEOPIXEL2_SEPARATE // UNCOMMENT WHEN NEOPIXEL 2 WORKS // CUSTOMIZED_EDITED
   #if ENABLED(NEOPIXEL2_SEPARATE)
     #define NEOPIXEL2_PIXELS           10 // Number of LEDs in the second strip // CUSTOMIZED_EDITED
     #define NEOPIXEL2_BRIGHTNESS      255 // Initial brightness (0-255) // CUSTOMIZED_EDITED
