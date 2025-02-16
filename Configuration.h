@@ -1293,11 +1293,11 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 278.39 } // CUSTOMIZED_EDITED
-//0.9 deg E3D motor + GT2 belt for X
-//0.9 deg E3D motor + GT2 belt for Y
-//1.8 deg Creality motors + TR8x2 screws for Z
-//0.9 deg E3D motor + Micro-Swiss Bowden extruder for E
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 3200, 278.39 } // CUSTOMIZED_EDITED
+//0.9 deg Spool3D motor + GT2 belt for X
+//0.9 deg Spool3D motor + GT2 belt for Y
+//0.9 deg Spool3D + TR8x2 screws for Z
+//0.9 deg Spool3D motor + Micro-Swiss Bowden extruder for E
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.

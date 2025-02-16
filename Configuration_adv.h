@@ -2994,7 +2994,7 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       1160       // (mA) RMS current. Multiply by 1.414 for peak current. // E3D 42x48 0.9deg motor CUSTOMIZED_EDITED
+    #define X_CURRENT       1160       // (mA) RMS current. Multiply by 1.414 for peak current. // Spool3D 42x40 0.9deg motor (42STH40-1684MAH) CUSTOMIZED_EDITED
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11
@@ -3014,7 +3014,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       1160 // E3D 42x40 0.9deg motor CUSTOMIZED_EDITED
+    #define Y_CURRENT       1380 // Spool3D 42x48 0.9deg motor (42STH48-2004MAH) CUSTOMIZED_EDITED
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -3034,7 +3034,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       580 // Creality 42x34 1.8deg motor CUSTOMIZED_EDITED
+    #define Z_CURRENT       1050 // Spool3D 42x34 0.9deg motor (42STH34-1504MAC) CUSTOMIZED_EDITED
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -3044,7 +3044,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z2)
-    #define Z2_CURRENT      Z_CURRENT // Creality 42x34 1.8deg motor CUSTOMIZED_EDITED
+    #define Z2_CURRENT      Z_CURRENT // Spool3D 42x34 0.9deg motor (42STH34-1504MAC) CUSTOMIZED_EDITED
     #define Z2_CURRENT_HOME Z_CURRENT_HOME
     #define Z2_MICROSTEPS   Z_MICROSTEPS
     #define Z2_RSENSE       Z_RSENSE
@@ -3134,7 +3134,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      1160 // E3D 42x48 0.9deg motor CUSTOMIZED_EDITED
+    #define E0_CURRENT      1380 // Spool3D 42x48 0.9deg motor (42STH48-2004MAH) CUSTOMIZED_EDITED
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
