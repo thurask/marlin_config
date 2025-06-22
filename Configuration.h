@@ -129,7 +129,7 @@
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Ender3Pro-SKR3EZ" // CUSTOMIZED_EDITED
-//#define CONFIGURABLE_MACHINE_NAME // Add G-code M550 to set/report the machine name
+#define CONFIGURABLE_MACHINE_NAME // Add G-code M550 to set/report the machine name // CUSTOMIZED_EDITED
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -148,9 +148,9 @@
  * Options: A4988, A5984, DRV8825, LV8729, TB6560, TB6600, TMC2100,
  *          TMC2130, TMC2130_STANDALONE, TMC2160, TMC2160_STANDALONE,
  *          TMC2208, TMC2208_STANDALONE, TMC2209, TMC2209_STANDALONE,
- *          TMC2660, TMC2660_STANDALONE, TMC5130, TMC5130_STANDALONE,
- *          TMC5160, TMC5160_STANDALONE
- * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
+ *          TMC2240, TMC2660, TMC2660_STANDALONE,
+ *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
+ * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC2240', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
 #define X_DRIVER_TYPE  TMC2209 // CUSTOMIZED_EDITED
 #define Y_DRIVER_TYPE  TMC2209 // CUSTOMIZED_EDITED
@@ -262,6 +262,7 @@
   #define SWITCHING_NOZZLE_SERVO_ANGLES { 0, 90 }   // A pair of angles for { E0, E1 }.
                                                     // For Dual Servo use two pairs: { { lower, raise }, { lower, raise } }
   #define SWITCHING_NOZZLE_SERVO_DWELL 2500         // Dwell time to wait for servo to make physical move
+  #define SWITCHING_NOZZLE_LIFT_TO_PROBE            // Lift toolheads out of the way while probing
 #endif
 
 // Switch nozzles by bumping the toolhead. Requires EVENT_GCODE_TOOLCHANGE_#.
@@ -582,7 +583,7 @@
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
 #define TEMP_SENSOR_BOARD 0
-#define TEMP_SENSOR_SOC 0
+#define TEMP_SENSOR_SOC 100 // MCU temperature sensor // CUSTOMIZED_EDITED
 #define TEMP_SENSOR_REDUNDANT 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -736,7 +737,12 @@
   #define MPC_AUTOTUNE_MENU                           // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash) // CUSTOMIZED_EDITED
 
   #define MPC_MAX 255                                 // (0..255) Current to nozzle while MPC is active.
-  #define MPC_HEATER_POWER { 40.0f }                  // (W) Heat cartridge powers.
+  #define MPC_HEATER_POWER { 60.0f }                  // (W) Nominal heat cartridge powers. // 60W heater // CUSTOMIZED_EDITED
+  //#define MPC_PTC                                   // Hotend power changes with temperature (e.g., PTC heat cartridges).
+  #if ENABLED(MPC_PTC)
+    #define MPC_HEATER_ALPHA { 0.0028f }              // Temperature coefficient of resistance of the heat cartridges.
+    #define MPC_HEATER_REFTEMP { 20 }                 // (°C) Reference temperature for MPC_HEATER_POWER and MPC_HEATER_ALPHA.
+  #endif
 
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
@@ -768,6 +774,7 @@
 
   #define MPC_TUNING_POS { X_CENTER, Y_CENTER, 1.0f } // (mm) M306 Autotuning position, ideally bed center at first layer height.
   #define MPC_TUNING_END_Z 10.0f                      // (mm) M306 Autotuning final Z position.
+  //#define EVENT_GCODE_AFTER_MPC_TUNE "M84"          // G-code to execute after MPC tune finished and Z raised.
 #endif
 
 //===========================================================================
@@ -848,7 +855,7 @@
 #endif
 
 // Add 'M190 R T' for more gradual M190 R bed cooling.
-//#define BED_ANNEALING_GCODE
+#define BED_ANNEALING_GCODE // CUSTOMIZED_EDITED
 
 //===========================================================================
 //==================== PID > Chamber Temperature Control ====================
@@ -917,14 +924,14 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 180 // CUSTOMIZED_EDITED
+#define EXTRUDE_MINTEMP 170 // CUSTOMIZED_EDITED
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 1000 // CUSTOMIZED_EDITED
+#define EXTRUDE_MAXLENGTH 1250 // CUSTOMIZED_EDITED
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -1907,10 +1914,10 @@
 #define Y_BED_SIZE 235 // CUSTOMIZED_EDITED
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -2 // Gulfcoast Robotics rail + Micro-Swiss extruder kit CUSTOMIZED_EDITED
+#define X_MIN_POS 0 // Gulfcoast Robotics rail + Micro-Swiss extruder kit CUSTOMIZED_EDITED
 #define Y_MIN_POS -7 // Gulfcoast Robotics rail kit CUSTOMIZED_EDITED
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 15 // CUSTOMIZED_EDITED
+#define X_MAX_POS X_BED_SIZE + 10 // CUSTOMIZED_EDITED
 #define Y_MAX_POS Y_BED_SIZE // CUSTOMIZED_EDITED
 #define Z_MAX_POS 350 // extended vertical extrusions CUSTOMIZED_EDITED
 //#define I_MIN_POS 0
@@ -2043,8 +2050,11 @@
     #define FILAMENT_MOTION_SENSOR // CUSTOMIZED_EDITED
 
     #if ENABLED(FILAMENT_MOTION_SENSOR)
-      #define FILAMENT_SWITCH_AND_MOTION // CUSTOMIZED_EDITED
+      #define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion // CUSTOMIZED_EDITED
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
+
+        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout
+
         #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
         #define FIL_MOTION1_PIN   PA0          // PA0, E1DET header // CUSTOMIZED_EDITED
 
@@ -2080,7 +2090,7 @@
         //#define FIL_MOTION8_STATE LOW
         //#define FIL_MOTION8_PULLUP
         //#define FIL_MOTION8_PULLDOWN
-      #endif
+      #endif // FILAMENT_SWITCH_AND_MOTION
     #endif // FILAMENT_MOTION_SENSOR
   #endif // FILAMENT_RUNOUT_DISTANCE_MM
 #endif // FILAMENT_RUNOUT_SENSOR
@@ -2297,7 +2307,7 @@
 #define LCD_BED_LEVELING // CUSTOMIZED_EDITED
 
 #if ENABLED(LCD_BED_LEVELING)
-  #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
+  #define MESH_EDIT_Z_STEP  0.005 // (mm) Step size while manually probing Z axis. // CUSTOMIZED_EDITED
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
   #define MESH_EDIT_MENU          // Add a menu to edit mesh points // CUSTOMIZED_EDITED
 #endif
@@ -2575,7 +2585,7 @@
  *
  *   Caveats: The ending Z should be the same as starting Z.
  */
-//#define NOZZLE_CLEAN_FEATURE // CUSTOMIZED_EDITED
+//#define NOZZLE_CLEAN_FEATURE // COME BACK TO THIS // CUSTOMIZED_EDITED
 
 #if ENABLED(NOZZLE_CLEAN_FEATURE)
   #define NOZZLE_CLEAN_PATTERN_LINE     // Provide 'G12 P0' - a simple linear cleaning pattern
@@ -3676,7 +3686,7 @@
   #define NEOPIXEL_STARTUP_TEST           // Cycle through colors at startup // CUSTOMIZED_EDITED
 
   // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
-  //#define NEOPIXEL2_SEPARATE // UNCOMMENT WHEN NEOPIXEL 2 WORKS // CUSTOMIZED_EDITED
+  //#define NEOPIXEL2_SEPARATE // COME BACK TO THIS AND UNCOMMENT WHEN NEOPIXEL 2 WORKS // CUSTOMIZED_EDITED
   #if ENABLED(NEOPIXEL2_SEPARATE)
     #define NEOPIXEL2_PIXELS           10 // Number of LEDs in the second strip // CUSTOMIZED_EDITED
     #define NEOPIXEL2_BRIGHTNESS      255 // Initial brightness (0-255) // CUSTOMIZED_EDITED
