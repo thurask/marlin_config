@@ -3675,10 +3675,10 @@
 // Support for Adafruit NeoPixel LED driver
 #define NEOPIXEL_LED // CUSTOMIZED_EDITED
 #if ENABLED(NEOPIXEL_LED)
-  #define NEOPIXEL_TYPE           NEO_BRG // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc. // CUSTOMIZED_EDITED
+  #define NEOPIXEL_TYPE           NEO_RGB // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc. // CUSTOMIZED_EDITED
                                           // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
   //#define NEOPIXEL_PIN                4 // LED driving pin // RGB lights on Mini12864 display // CUSTOMIZED_EDITED
-  #define NEOPIXEL2_TYPE          NEO_GRBW // RGB connector on motherboard // CUSTOMIZED_EDITED
+  #define NEOPIXEL2_TYPE          NEO_RGBW // RGB connector on motherboard // CUSTOMIZED_EDITED
   #define NEOPIXEL2_PIN               PE6 // CUSTOMIZED_EDITED
   #define NEOPIXEL_PIXELS               3 // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.) // CUSTOMIZED_EDITED
   #define NEOPIXEL_IS_SEQUENTIAL          // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
