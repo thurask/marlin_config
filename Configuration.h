@@ -3137,7 +3137,7 @@
 
 //
 // FYSETC variant of the MINI12864 graphic controller with SD support
-// https://wiki.fysetc.com/Mini12864_Panel/
+// https://wiki.fysetc.com/docs/Mini12864Panel
 //
 //#define FYSETC_MINI_12864_X_X    // Type C/D/E/F. No tunable RGB Backlight by default
 //#define FYSETC_MINI_12864_1_2    // Type C/D/E/F. Simple RGB Backlight (always on)
@@ -3686,10 +3686,10 @@
   #define NEOPIXEL_STARTUP_TEST           // Cycle through colors at startup // CUSTOMIZED_EDITED
 
   // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
-  //#define NEOPIXEL2_SEPARATE // COME BACK TO THIS AND UNCOMMENT WHEN NEOPIXEL 2 WORKS // CUSTOMIZED_EDITED
+  #define NEOPIXEL2_SEPARATE // CUSTOMIZED_EDITED
   #if ENABLED(NEOPIXEL2_SEPARATE)
-    #define NEOPIXEL2_PIXELS           10 // Number of LEDs in the second strip // CUSTOMIZED_EDITED
-    #define NEOPIXEL2_BRIGHTNESS      255 // Initial brightness (0-255) // CUSTOMIZED_EDITED
+    #define NEOPIXEL2_PIXELS           30 // Number of LEDs in the second strip // CUSTOMIZED_EDITED
+    #define NEOPIXEL2_BRIGHTNESS       64 // Initial brightness (0-255) // CUSTOMIZED_EDITED
     #define NEOPIXEL2_STARTUP_TEST        // Cycle through colors at startup
     #define NEOPIXEL_M150_DEFAULT      -1 // Default strip for M150 without 'S'. Use -1 to set all by default.
   #else
